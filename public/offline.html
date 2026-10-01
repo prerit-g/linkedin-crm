@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4F46E5">
+  <title>Outreach CRM - Offline</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .offline-container {
+      max-width: 400px;
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .offline-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: #FEE2E2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #DC2626;
+      font-size: 32px;
+    }
+
+    h1 {
+      color: #111827;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #6B7280;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .features {
+      background: #F9FAFB;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .features h2 {
+      color: #111827;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .features ul {
+      list-style: none;
+    }
+
+    .features li {
+      color: #6B7280;
+      font-size: 14px;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .features li:before {
+      content: "✓";
+      color: #10B981;
+      margin-right: 8px;
+      font-weight: bold;
+    }
+
+    .retry-button {
+      background: #4F46E5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      width: 100%;
+    }
+
+    .retry-button:hover {
+      background: #4338CA;
+    }
+
+    .retry-button:active {
+      background: #3730A3;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: #9CA3AF;
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+      .offline-container {
+        padding: 32px 24px;
+      }
+      
+      h1 {
+        font-size: 20px;
+      }
+      
+      p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="offline-icon">📶</div>
+    
+    <h1>You're offline</h1>
+    
+    <p>The Outreach CRM app needs an internet connection to continue. Your data is safely stored locally and will sync when you're back online.</p>
+    
+    <div class="features">
+      <h2>What you can still do offline:</h2>
+      <ul>
+        <li>View all your saved contacts</li>
+        <li>Check message history</li>
+        <li>Review classification results</li>
+        <li>Access your outreach tracking</li>
+      </ul>
+    </div>
+    
+    <button class="retry-button" onclick="window.location.reload()">
+      Retry Connection
+    </button>
+    
+    <div class="footer">
+      Outreach CRM - Offline Mode
+    </div>
+  </div>
+
+  <script>
+    // Check connection status periodically
+    setInterval(() => {
+      if (navigator.onLine) {
+        window.location.href = '/';
+      }
+    }, 5000);
+
+    // Listen for connection restoration
+    window.addEventListener('online', () => {
+      window.location.href = '/';
+    });
+
+    // Show a message when retry is clicked
+    document.querySelector('.retry-button').addEventListener('click', function(e) {
+      if (!navigator.onLine) {
+        this.textContent = 'Still offline...';
+        setTimeout(() => {
+          this.textContent = 'Retry Connection';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

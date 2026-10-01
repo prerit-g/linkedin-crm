@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Safe zone (80% of canvas) -->
+  <g transform="translate(51.2 51.2) scale(0.8)">
+    <!-- Background circle -->
+    <circle cx="256" cy="256" r="200" fill="#4F46E5"/>
+    
+    <!-- "O" letter for Outreach -->
+    <circle cx="256" cy="256" r="120" fill="none" stroke="#FFFFFF" stroke-width="40"/>
+    
+    <!-- Briefcase handle -->
+    <rect x="196" y="140" width="120" height="20" rx="10" fill="#FFFFFF"/>
+    
+    <!-- Briefcase body -->
+    <rect x="136" y="180" width="240" height="160" rx="20" fill="#FFFFFF"/>
+  </g>
+</svg>

@@ -1,0 +1,81 @@
+=== MANUAL GIT STEPS FOR GITHUB ===
+Follow these steps EXACTLY in order:
+
+=== STEP 0: Open the RIGHT terminal ===
+Option A: Open "Git Bash" (search in Start menu)
+Option B: Open "Command Prompt" as Administrator
+
+=== STEP 1: Navigate to your project ===
+Type this command:
+cd "c:\Users\preri\linkedin crm"
+
+=== STEP 2: Check Git is working ===
+Type:
+git --version
+
+You should see something like: "git version 2.x.x"
+
+=== STEP 3: Initialize Git ===
+Type:
+git init
+
+=== STEP 4: Configure your identity ===
+Type these TWO commands (use YOUR email and name):
+git config user.email "YOUR-GITHUB-EMAIL@example.com"
+git config user.name "YOUR NAME"
+
+=== STEP 5: Add files ===
+Type:
+git add .
+
+=== STEP 6: Commit files ===
+Type:
+git commit -m "Initial commit: LinkedIn Outreach CRM PWA"
+
+=== STEP 7: Connect to GitHub ===
+Type:
+git remote add origin https://github.com/prerit-g/linkedin-crm.git
+
+=== STEP 8: Push to GitHub ===
+Type:
+git push -u origin main
+
+=== TROUBLESHOOTING ===
+
+If STEP 8 asks for username/password:
+1. Use your GitHub USERNAME (not email)
+2. For password: Use a GitHub Personal Access Token
+   - Go to: https://github.com/settings/tokens
+   - Click "Generate new token"
+   - Select "repo" scope
+   - Copy the token and use it as password
+
+If "git" command not found:
+1. Restart your computer after Git installation
+2. Or use "Git Bash" instead of Command Prompt
+
+If "main" branch error:
+Type instead: git push -u origin master
+
+=== VERIFY ===
+After successful push:
+1. Go to: https://github.com/prerit-g/linkedin-crm
+2. You should see all your files
+
+=== COMMANDS SUMMARY ===
+1. cd "c:\Users\preri\linkedin crm"
+2. git --version
+3. git init
+4. git config user.email "your-email"
+5. git config user.name "your-name"
+6. git add .
+7. git commit -m "Initial commit"
+8. git remote add origin https://github.com/prerit-g/linkedin-crm.git
+9. git push -u origin main
+
+=== DONE WHEN ===
+• You see "Everything up-to-date" message
+• GitHub shows your files online
+
+=== NEED HELP? ===
+Take screenshots of any error messages and reply here.

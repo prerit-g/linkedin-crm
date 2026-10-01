@@ -1,0 +1,12 @@
+# PLACEHOLDER ICON: icon-512.png
+# Size: 512x512
+# This should be replaced with an actual PNG icon
+# Generate using: .\generate-icons.ps1 (requires ImageMagick)
+# Or create in design software and save as PNG
+
+To create the actual icon:
+1. Install ImageMagick from https://imagemagick.org/
+2. Run: .\generate-icons.ps1
+3. Actual PNG files will be generated from the SVG templates
+
+For now, using this placeholder to allow PWA development to continue.

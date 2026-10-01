@@ -1,0 +1,60 @@
+=== GITHUB UPLOAD CHECKLIST ===
+Follow these steps in order:
+
+1. ✅ OPEN BROWSER
+   - Go to: https://github.com/prerit-g/linkedin-crm
+   - Log in if needed
+
+2. ✅ UPLOAD FILES
+   - Click "Add file" → "Upload files"
+   - Drag ALL files/folders from c:\Users\preri\linkedin crm
+   - EXCEPT: node_modules/ and dist/
+
+3. ✅ COMMIT
+   - Commit message: "Initial commit: LinkedIn Outreach CRM PWA"
+   - Click "Commit changes"
+
+4. ✅ VERIFY
+   - Check that all files appear on GitHub
+   - Especially: src/, public/, package.json
+
+=== FILES TO UPLOAD ===
+[ ] .gitignore
+[ ] .kiro/ (entire folder)
+[ ] public/ (entire folder)
+[ ] src/ (entire folder)
+[ ] README.md
+[ ] LICENSE
+[ ] package.json
+[ ] package-lock.json
+[ ] index.html
+[ ] tailwind.config.ts
+[ ] vite.config.ts
+[ ] tsconfig.json
+[ ] tsconfig.app.json
+[ ] tsconfig.node.json
+[ ] vitest.config.ts
+[ ] vitest.setup.ts
+[ ] postcss.config.js
+[ ] UPLOAD_TO_GITHUB_GUIDE.md (this guide)
+
+=== DO NOT UPLOAD ===
+[ ] node_modules/ (too large, skip)
+[ ] dist/ (generated files, skip)
+[ ] Any .env files (security)
+
+=== QUICK TIPS ===
+• Drag-drop works best
+• GitHub handles folders automatically
+• Commit message can be anything
+• You can delete and re-upload if needed
+
+=== DONE WHEN ===
+• You see all files on GitHub
+• Repository shows "Initial commit"
+• You can browse src/ folder online
+
+=== NEED HELP? ===
+• Reply here with screenshots
+• Use GitHub's upload tutorial
+• Ask someone to help drag-drop files

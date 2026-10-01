@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Test - Outreach CRM</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #4F46E5 0%, #3730A3 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .test-container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .test-header {
+      background: #4F46E5;
+      color: white;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .test-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .test-header p {
+      opacity: 0.9;
+      font-size: 16px;
+    }
+
+    .test-content {
+      padding: 32px;
+    }
+
+    .test-step {
+      background: #F9FAFB;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid #E5E7EB;
+    }
+
+    .test-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: #4F46E5;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .step-content {
+      color: #6B7280;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .step-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .test-button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .test-button.primary {
+      background: #4F46E5;
+      color: white;
+    }
+
+    .test-button.primary:hover {
+      background: #4338CA;
+    }
+
+    .test-button.secondary {
+      background: white;
+      color: #4F46E5;
+      border: 1px solid #4F46E5;
+    }
+
+    .test-button.secondary:hover {
+      background: #F9FAFB;
+    }
+
+    .test-result {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .test-result.success {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 1px solid #10B981;
+      display: block;
+    }
+
+    .test-result.error {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #DC2626;
+      display: block;
+    }
+
+    .test-result.info {
+      background: #DBEAFE;
+      color: #1E40AF;
+      border: 1px solid #3B82F6;
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: #9CA3AF;
+      font-size: 14px;
+      border-top: 1px solid #E5E7EB;
+    }
+
+    @media (max-width: 640px) {
+      .test-header {
+        padding: 24px;
+      }
+      
+      .test-content {
+        padding: 24px;
+      }
+      
+      .test-step {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <div class="test-header">
+      <h1>Outreach CRM - PWA Test</h1>
+      <p>Test Progressive Web App installation and offline functionality</p>
+    </div>
+
+    <div class="test-content">
+      <!-- Step 1: Service Worker Test -->
+      <div class="test-step">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <div class="step-title">Service Worker Test</div>
+        </div>
+        <div class="step-content">
+          Check if service workers are supported and active. Service workers enable offline functionality and background updates.
+        </div>
+        <div class="step-actions">
+          <button class="test-button primary" onclick="testServiceWorker()">Test Service Worker</button>
+          <button class="test-button secondary" onclick="clearServiceWorker()">Clear Service Worker</button>
+        </div>
+        <div id="sw-result" class="test-result"></div>
+      </div>
+
+      <!-- Step 2: Cache Test -->
+      <div class="test-step">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <div class="step-title">Cache Test</div>
+        </div>
+        <div class="step-content">
+          Verify that the app assets are properly cached for offline use. This ensures the app works without an internet connection.
+        </div>
+        <div class="step-actions">
+          <button class="test-button primary" onclick="testCache()">Test Cache</button>
+          <button class="test-button secondary" onclick="clearCache()">Clear Cache</button>
+        </div>
+        <div id="cache-result" class="test-result"></div>
+      </div>
+
+      <!-- Step 3: Manifest Test -->
+      <div class="test-step">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <div class="step-title">Manifest Test</div>
+        </div>
+        <div class="step-content">
+          Check if the web app manifest is properly configured. The manifest defines how the app appears when installed.
+        </div>
+        <div class="step-actions">
+          <button class="test-button primary" onclick="testManifest()">Test Manifest</button>
+          <button class="test-button secondary" onclick="viewManifest()">View Manifest</button>
+        </div>
+        <div id="manifest-result" class="test-result"></div>
+      </div>
+
+      <!-- Step 4: Install Test -->
+      <div class="test-step">
+        <div class="step-header">
+          <div class="step-number">4</div>
+          <div class="step-title">Installation Test</div>
+        </div>
+        <div class="step-content">
+          Test if the app can be installed as a Progressive Web App on your device.
+        </div>
+        <div class="step-actions">
+          <button class="test-button primary" onclick="testInstallation()">Test Installation</button>
+          <a href="/" class="test-button secondary">Go to App</a>
+        </div>
+        <div id="install-result" class="test-result"></div>
+      </div>
+
+      <!-- Step 5: Offline Test -->
+      <div class="test-step">
+        <div class="step-header">
+          <div class="step-number">5</div>
+          <div class="step-title">Offline Test</div>
+        </div>
+        <div class="step-content">
+          Simulate offline conditions to verify the app works without an internet connection.
+        </div>
+        <div class="step-actions">
+          <button class="test-button primary" onclick="testOffline()">Simulate Offline</button>
+          <button class="test-button secondary" onclick="checkOnlineStatus()">Check Status</button>
+        </div>
+        <div id="offline-result" class="test-result"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Outreach CRM PWA Test • Version 1.0.0 • All tests run client-side</p>
+    </div>
+  </div>
+
+  <script>
+    function showResult(elementId, message, type = 'info') {
+      const element = document.getElementById(elementId);
+      element.textContent = message;
+      element.className = 'test-result ' + type;
+    }
+
+    function testServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(registration => {
+          if (registration) {
+            showResult('sw-result', '✓ Service worker is active and registered.', 'success');
+          } else {
+            showResult('sw-result', '✗ Service worker is not registered.', 'error');
+          }
+        }).catch(error => {
+          showResult('sw-result', '✗ Error checking service worker: ' + error.message, 'error');
+        });
+      } else {
+        showResult('sw-result', '✗ Service workers are not supported in this browser.', 'error');
+      }
+    }
+
+    function clearServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(registration => {
+          if (registration) {
+            registration.unregister().then(() => {
+              showResult('sw-result', '✓ Service worker unregistered. Refresh page to re-register.', 'info');
+            });
+          } else {
+            showResult('sw-result', 'No service worker registered.', 'info');
+          }
+        });
+      }
+    }
+
+    function testCache() {
+      if ('caches' in window) {
+        caches.has('vite-pwa-assets').then(hasCache => {
+          if (hasCache) {
+            showResult('cache-result', '✓ App assets are cached for offline use.', 'success');
+          } else {
+            showResult('cache-result', '✗ App assets are not cached.', 'error');
+          }
+        }).catch(error => {
+          showResult('cache-result', '✗ Error checking cache: ' + error.message, 'error');
+        });
+      } else {
+        showResult('cache-result', '✗ Cache API not supported in this browser.', 'error');
+      }
+    }
+
+    function clearCache() {
+      if ('caches' in window) {
+        caches.keys().then(cacheNames => {
+          Promise.all(cacheNames.map(name => caches.delete(name)))
+            .then(() => {
+              showResult('cache-result', '✓ All caches cleared. Refresh page to rebuild cache.', 'info');
+            });
+        }).catch(error => {
+          showResult('cache-result', '✗ Error clearing cache: ' + error.message, 'error');
+        });
+      }
+    }
+
+    function testManifest() {
+      const manifestLink = document.querySelector('link[rel="manifest"]');
+      if (manifestLink) {
+        fetch(manifestLink.href)
+          .then(response => response.json())
+          .then(manifest => {
+            const required = ['name', 'short_name', 'start_url', 'display'];
+            const missing = required.filter(field => !manifest[field]);
+            
+            if (missing.length === 0) {
+              showResult('manifest-result', '✓ Manifest is properly configured.', 'success');
+            } else {
+              showResult('manifest-result', `✗ Manifest missing required fields: ${missing.join(', ')}`, 'error');
+            }
+          })
+          .catch(error => {
+            showResult('manifest-result', '✗ Error loading manifest: ' + error.message, 'error');
+          });
+      } else {
+        showResult('manifest-result', '✗ Manifest link not found.', 'error');
+      }
+    }
+
+    function viewManifest() {
+      const manifestLink = document.querySelector('link[rel="manifest"]');
+      if (manifestLink) {
+        window.open(manifestLink.href, '_blank');
+      } else {
+        showResult('manifest-result', 'No manifest found to view.', 'info');
+      }
+    }
+
+    function testInstallation() {
+      // Check for beforeinstallprompt event support
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        showResult('install-result', '✓ App is already installed as a PWA.', 'success');
+      } else if ('BeforeInstallPromptEvent' in window) {
+        showResult('install-result', '✓ This browser supports PWA installation. Visit the main app to install.', 'success');
+      } else {
+        showResult('install-result', '✗ This browser may not support automatic PWA installation.', 'error');
+      }
+    }
+
+    function testOffline() {
+      if (navigator.onLine) {
+        showResult('offline-result', '✓ You are currently online. To test offline mode, disconnect from the internet and refresh the app.', 'info');
+      } else {
+        showResult('offline-result', '✓ You are currently offline. The app should still work if properly cached.', 'success');
+      }
+    }
+
+    function checkOnlineStatus() {
+      showResult('offline-result', `Current status: ${navigator.onLine ? 'Online' : 'Offline'}`, 'info');
+    }
+
+    // Run initial tests
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        testServiceWorker();
+        testCache();
+        testManifest();
+        testInstallation();
+        checkOnlineStatus();
+      }, 500);
+    });
+  </script>
+</body>
+</html>
